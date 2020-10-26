@@ -165,6 +165,7 @@ fn out_of_order_collection() {
     #[derive(Debug, Deserialize, PartialEq)]
     struct Collection {
         a: Vec<A>,
+        #[serde(alias = "d")]
         b: Vec<B>,
         c: C,
     }
@@ -191,6 +192,7 @@ fn out_of_order_collection() {
             <a name="a1" />
             <a name="a2" />
             <b name="b1" />
+            <d name="d1" />
             <a name="a3" />
             <c name="c" />
             <b name="b2" />
@@ -205,7 +207,11 @@ fn out_of_order_collection() {
             A { name: "a3".into() },
             A { name: "a4".into() },
         ],
-        b: vec![B { name: "b1".into() }, B { name: "b2".into() }],
+        b: vec![
+            B { name: "b1".into() },
+            B { name: "d1".into() },
+            B { name: "b2".into() },
+        ],
         c: C { name: "c".into() },
     };
 
